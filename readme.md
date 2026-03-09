@@ -57,28 +57,3 @@ async function executeCull(projectId, photoList) {
 ### 📄 License
 
 © 2026 Meko no Mori. All rights reserved. This is a proprietary commercial product. The source code is private.
-
-### Langkah 3: Push ke GitHub (Public)
-
-1. Buka GitHub lu di _browser_. Bikin repository baru, kasih nama **`MekoSort`**.
-2. **WAJIB pilih opsi PUBLIC.** (Jangan centang _Add a README file_, biarin kosong).
-3. Buka terminal di VSCode baru lu (yang folder `MekoSort-Release`), ketik perintah sakti ini:
-   - `git init`
-   - `git add README.md`
-   - `git commit -m "Initial release documentation"`
-   - `git branch -M main`
-   - `git remote add origin <PASTE_LINK_REPO_PUBLIC_LU>`
-   - `git push -u origin main`
-
-### Langkah 4: Pajang Barangnya (.exe)
-
-1. Pergi ke halaman repo `MekoSort` (Public) lu di GitHub.
-2. Liat menu sebelah kanan, klik **Releases** -> **Create a new release**.
-3. _Tag version_: ketik `v1.0.0`
-4. _Release title_: ketik `MekoSort v1.0.0 - Initial Release`
-5. **Drag & Drop** file `MekoSort Setup 1.0.0.exe` (yang udah lu bikin sebelumnya) ke kotak _Attach binaries by dropping them here_.
-6. Klik **Publish release**.
-
----
-
-Gass lakuin 4 langkah ini. Nanti kalau lu mau nambahin gambar logo atau _screenshot_ aplikasi lu ke dalem `README.md`, tinggal lu _edit_ file-nya nanti. Lapor ke gue kalau Etalase lu udah tayang dan file `.exe`-nya udah mejeng di _Releases_!
