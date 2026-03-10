@@ -2,7 +2,8 @@
 
 **Lightning-fast Photo Culling & Sorting Engine.**
 
-![MekoSort App](https://via.placeholder.com/800x400.png?text=Upload+Screenshot+Aplikasi+Lu+Nanti+Kesini)
+![MekoSort App](<img width="895" height="661" alt="Screenshot 2026-03-09 124531" src="https://github.com/user-attachments/assets/b938b127-639f-40b4-8a6c-e04b027057bc" />
+)
 
 MekoSort is a professional desktop application engineered to solve the biggest bottleneck in a photographer's workflow: sorting through thousands of massive photo files. Built with a focus on absolute speed and zero-lag user experience.
 
