@@ -1,21 +1,70 @@
 # MekoSort 🚀
 
+_[Read in English](#-english-version)_
+
 **Mesin Culling & Sortir Foto Ultra-Cepat.**
 
-<<<<<<< HEAD
 ![MekoSort App](mekosort.png)
 
 MekoSort adalah aplikasi desktop profesional yang dirancang untuk mengatasi hambatan terbesar dalam alur kerja (workflow) seorang fotografer: menyortir ribuan file foto berukuran raksasa. Dibangun dengan fokus mutlak pada kecepatan dan pengalaman pengguna tanpa lag.
 
 Diciptakan oleh **Meko no Mori** - UI/UX & Software Agency.
 
+## 📥 Download & Instalasi
+
+1. Buka tab [Releases](../../releases).
+2. Unduh `MekoSort Setup 1.0.0.exe`.
+3. Jalankan installer dan mulai sortir foto Anda secara instan.
+   _(Catatan: Windows SmartScreen mungkin menampilkan peringatan "Unknown Publisher" untuk developer indie. Klik "More Info" -> "Run Anyway")._
+
 ---
 
+## 🛠️ Di Balik Layar (Arsitektur & Rekayasa)
+
+_Untuk Tech Leads dan Developer._
+
+Membangun aplikasi desktop yang mampu menangani **6.000+ gambar resolusi tinggi** secara bersamaan tanpa crash membutuhkan manajemen memori yang ketat dan arsitektur yang sangat dioptimalkan.
+
+**Tech Stack:** `Electron` | `React` | `TypeScript` | `Vite` | `TailwindCSS` | `Better-SQLite3`
+
+### Tantangan Rekayasa Utama yang Diselesaikan:
+
+1. **Zero-Lag Infinite Scroll:** Mengimplementasikan DOM virtualization di React untuk merender hanya foto yang terlihat di layar, mencegah kebocoran memori (memory leaks) dan mempertahankan scrolling 60fps bahkan pada direktori raksasa.
+2. **State Persistence:** Mengintegrasikan `Better-SQLite3` langsung ke dalam Electron Main Process. Setiap proses cull, pelabelan, dan perubahan kategori langsung disinkronkan ke file `.db` lokal. Jika aplikasi crash atau PC mati tiba-tiba, progres tidak ada yang hilang.
+3. **Non-Destructive OS Operations:** Memanfaatkan modul `fs` dari Node.js untuk pemindahan file secepat kilat, mengeksekusi transfer file fisik hanya ketika pengguna secara sadar menekan tombol "Execute".
+4. **Keyboard-First Navigation:** Mengoptimalkan event listeners untuk culling tanpa mouse yang mulus menggunakan Tombol Panah (Navigasi) dan Numpad `[1-5]` (Kategorisasi).
+
+### Cuplikan Kode: Safe Execution Engine
+
+_(Sekilas tentang bagaimana MekoSort merutekan file dengan aman di tingkat OS)_
+
+```typescript
+// Konsep abstrak dari Eksekusi Culling
+async function executeCull(projectId, photoList) {
+  try {
+    db.transaction(() => {
+      photoList.forEach((photo) => {
+        if (photo.status === "APPROVED") {
+          fs.renameSync(photo.sourcePath, photo.targetPath);
+          db.updateStatus(photo.id, "MOVED");
+        }
+      });
+    })();
+  } catch (error) {
+    logger.error("Eksekusi dihentikan untuk mencegah kehilangan data", error);
+  }
+}
+```
+
+### 📄 Lisensi
+
+© 2026 Meko no Mori. Hak cipta dilindungi undang-undang. Ini adalah produk komersial berpemilik. Source code bersifat tertutup (private).
+
+---
+
+## 🇬🇧 English Version
+
 **Lightning-fast Photo Culling & Sorting Engine.**
-=======
-![MekoSort App](<img width="895" height="661" alt="Screenshot 2026-03-09 124531" src="https://github.com/user-attachments/assets/b938b127-639f-40b4-8a6c-e04b027057bc" />
-)
->>>>>>> 1fd33673ce44f4f7b6a7b8cdd38d40ed65f41e48
 
 MekoSort is a professional desktop application engineered to solve the biggest bottleneck in a photographer's workflow: sorting through thousands of massive photo files. Built with a focus on absolute speed and zero-lag user experience.
 
