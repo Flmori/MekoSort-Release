@@ -2,6 +2,7 @@
 
 **Mesin Culling & Sortir Foto Ultra-Cepat.**
 
+<<<<<<< HEAD
 ![MekoSort App](mekosort.png)
 
 MekoSort adalah aplikasi desktop profesional yang dirancang untuk mengatasi hambatan terbesar dalam alur kerja (workflow) seorang fotografer: menyortir ribuan file foto berukuran raksasa. Dibangun dengan fokus mutlak pada kecepatan dan pengalaman pengguna tanpa lag.
@@ -11,6 +12,10 @@ Diciptakan oleh **Meko no Mori** - UI/UX & Software Agency.
 ---
 
 **Lightning-fast Photo Culling & Sorting Engine.**
+=======
+![MekoSort App](<img width="895" height="661" alt="Screenshot 2026-03-09 124531" src="https://github.com/user-attachments/assets/b938b127-639f-40b4-8a6c-e04b027057bc" />
+)
+>>>>>>> 1fd33673ce44f4f7b6a7b8cdd38d40ed65f41e48
 
 MekoSort is a professional desktop application engineered to solve the biggest bottleneck in a photographer's workflow: sorting through thousands of massive photo files. Built with a focus on absolute speed and zero-lag user experience.
 
