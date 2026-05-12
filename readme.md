@@ -1,121 +1,39 @@
-# MekoSort 🚀
+# MekoSort v2.0.0 🚀
 
-_[Read in English](#-english-version)_
-
-**Mesin Culling & Sortir Foto Ultra-Cepat.**
+**The Ultimate Lightning-Fast Photo Culling & Sorting Engine.**
 
 ![MekoSort App](mekosort.png)
 
-MekoSort adalah aplikasi desktop profesional yang dirancang untuk mengatasi hambatan terbesar dalam alur kerja (workflow) seorang fotografer: menyortir ribuan file foto berukuran raksasa. Dibangun dengan fokus mutlak pada kecepatan dan pengalaman pengguna tanpa lag.
+MekoSort v2.0.0 adalah evolusi total. Kami meninggalkan Electron dan membangun ulang inti aplikasi menggunakan **Rust** untuk kecepatan yang tidak tertandingi. Dirancang khusus untuk fotografer profesional yang menangani ribuan file RAW tanpa kompromi pada performa.
 
 Diciptakan oleh **Meko no Mori** - UI/UX & Software Agency.
 
-## 📥 Download & Instalasi
+## 📥 Download v2.0.0 (Official Release)
 
-1. Buka tab [Releases](../../releases).
-2. Unduh `MekoSort Setup 1.0.0.exe`.
-3. Jalankan installer dan mulai sortir foto Anda secara instan.
-   _(Catatan: Windows SmartScreen mungkin menampilkan peringatan "Unknown Publisher" untuk developer indie. Klik "More Info" -> "Run Anyway")._
-
----
-
-## 🛠️ Di Balik Layar (Arsitektur & Rekayasa)
-
-_Untuk Tech Leads dan Developer._
-
-Membangun aplikasi desktop yang mampu menangani **6.000+ gambar resolusi tinggi** secara bersamaan tanpa crash membutuhkan manajemen memori yang ketat dan arsitektur yang sangat dioptimalkan.
-
-**Tech Stack:** `Electron` | `React` | `TypeScript` | `Vite` | `TailwindCSS` | `Better-SQLite3`
-
-### Tantangan Rekayasa Utama yang Diselesaikan:
-
-1. **Zero-Lag Infinite Scroll:** Mengimplementasikan DOM virtualization di React untuk merender hanya foto yang terlihat di layar, mencegah kebocoran memori (memory leaks) dan mempertahankan scrolling 60fps bahkan pada direktori raksasa.
-2. **State Persistence:** Mengintegrasikan `Better-SQLite3` langsung ke dalam Electron Main Process. Setiap proses cull, pelabelan, dan perubahan kategori langsung disinkronkan ke file `.db` lokal. Jika aplikasi crash atau PC mati tiba-tiba, progres tidak ada yang hilang.
-3. **Non-Destructive OS Operations:** Memanfaatkan modul `fs` dari Node.js untuk pemindahan file secepat kilat, mengeksekusi transfer file fisik hanya ketika pengguna secara sadar menekan tombol "Execute".
-4. **Keyboard-First Navigation:** Mengoptimalkan event listeners untuk culling tanpa mouse yang mulus menggunakan Tombol Panah (Navigasi) dan Numpad `[1-5]` (Kategorisasi).
-
-### Cuplikan Kode: Safe Execution Engine
-
-_(Sekilas tentang bagaimana MekoSort merutekan file dengan aman di tingkat OS)_
-
-```typescript
-// Konsep abstrak dari Eksekusi Culling
-async function executeCull(projectId, photoList) {
-  try {
-    db.transaction(() => {
-      photoList.forEach((photo) => {
-        if (photo.status === "APPROVED") {
-          fs.renameSync(photo.sourcePath, photo.targetPath);
-          db.updateStatus(photo.id, "MOVED");
-        }
-      });
-    })();
-  } catch (error) {
-    logger.error("Eksekusi dihentikan untuk mencegah kehilangan data", error);
-  }
-}
-```
-
-### 📄 Lisensi
-
-© 2026 Meko no Mori. Hak cipta dilindungi undang-undang. Ini adalah produk komersial berpemilik. Source code bersifat tertutup (private).
+1. Kunjungi [Website Resmi MekoSort](https://meko-sort-web.vercel.app/) untuk Live Counter.
+2. Atau langsung ke tab [Releases](../../releases).
+3. Unduh `MekoSort_v2.0.0_x64_en-US.msi`.
 
 ---
 
-## 🇬🇧 English Version
+## 🛠️ Engineering Excellence (v2.0.0 Rewrite)
 
-**Lightning-fast Photo Culling & Sorting Engine.**
+_Architecture update for Tech Leads and Software Engineers._
 
-MekoSort is a professional desktop application engineered to solve the biggest bottleneck in a photographer's workflow: sorting through thousands of massive photo files. Built with a focus on absolute speed and zero-lag user experience.
+Versi 2.0.0 menandai transisi kami ke arsitektur **Tauri**, memindahkan beban kerja berat dari JavaScript ke **Rust Layer**.
 
-Crafted by **Meko no Mori** - UI/UX & Software Agency.
+**Tech Stack:** `Tauri (Rust Core)` | `React` | `TypeScript` | `Vite` | `TailwindCSS` | `Supabase`
 
-## 📥 Download & Installation
+### Key Engineering Upgrades:
 
-1. Go to the [Releases](../../releases) tab.
-2. Download `MekoSort Setup 1.0.0.exe`.
-3. Run the installer and start sorting your photos instantly.
-   _(Note: Windows SmartScreen might show an "Unknown Publisher" warning for indie developers. Click "More Info" -> "Run Anyway")._
+1. **Rust-Powered Culling:** Pemrosesan metadata file RAW kini dilakukan di level sistem melalui Rust, menghilangkan bottleneck I/O yang ada di versi sebelumnya.
+2. **Memory Efficiency:** Dengan Tauri, footprint memori aplikasi berkurang hingga 80% dibandingkan versi Electron.
+3. **Hidden ExifTool Integration:** Eksekusi `exiftool` dilakukan secara *background silent process* (No CMD Spam) menggunakan `creation_flags` pada Windows.
+4. **Live Statistics:** Integrasi Supabase RPC untuk melacak metrik adopsi pengguna secara real-time.
 
----
+### Code Snippet: The Rust Advantage
 
-## 🛠️ Under the Hood (Architecture & Engineering)
-
-_For Tech Leads and Developers._
-
-Building a desktop app that handles **6,000+ high-resolution images** simultaneously without crashing requires strict memory management and an optimized architecture.
-
-**Tech Stack:** `Electron` | `React` | `TypeScript` | `Vite` | `TailwindCSS` | `Better-SQLite3`
-
-### Key Engineering Challenges Solved:
-
-1. **Zero-Lag Infinite Scroll:** Implemented DOM virtualization in React to render only the visible photos, preventing memory leaks and maintaining 60fps scrolling even with massive directories.
-2. **State Persistence:** Integrated `Better-SQLite3` directly into the Electron Main Process. Every cull, label, and category change is immediately synced to a local `.db` file. If the app crashes or the PC shuts down, zero progress is lost.
-3. **Non-Destructive OS Operations:** Leveraged Node.js `fs` module for lightning-fast file movements, executing physical file transfers only when the user explicitly hits "Execute".
-4. **Keyboard-First Navigation:** Optimized event listeners for seamless, mouse-free culling using Arrow Keys (Navigation) and Numpad `[1-5]` (Categorization).
-
-### Code Snippet: Safe Execution Engine
-
-_(A glimpse into how MekoSort safely routes files at the OS level)_
-
-```typescript
-// Abstracted concept of the Culling Execution
-async function executeCull(projectId, photoList) {
-  try {
-    db.transaction(() => {
-      photoList.forEach((photo) => {
-        if (photo.status === "APPROVED") {
-          fs.renameSync(photo.sourcePath, photo.targetPath);
-          db.updateStatus(photo.id, "MOVED");
-        }
-      });
-    })();
-  } catch (error) {
-    logger.error("Execution halted to prevent data loss", error);
-  }
-}
-```
-
-### 📄 License
-
-© 2026 Meko no Mori. All rights reserved. This is a proprietary commercial product. The source code is private.
+```rust
+// Bagaimana kami menangani file secara instan dan aman di layer Rust
+#[tauri::command]
+fn execute_sort(files: Vec<Photo
