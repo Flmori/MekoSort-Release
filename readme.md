@@ -1,39 +1,27 @@
-# MekoSort v2.0.0 🚀
+# MekoSort v2.0.0 - The Rust Revolution 🦀
 
-**The Ultimate Lightning-Fast Photo Culling & Sorting Engine.**
+**Lightning-fast Photo Culling & Sorting Engine.**
 
-![MekoSort App](mekosort.png)
+MekoSort adalah aplikasi desktop profesional yang dirancang untuk mengatasi hambatan terbesar fotografer: menyortir ribuan file RAW berukuran besar tanpa lag.
 
-MekoSort v2.0.0 adalah evolusi total. Kami meninggalkan Electron dan membangun ulang inti aplikasi menggunakan **Rust** untuk kecepatan yang tidak tertandingi. Dirancang khusus untuk fotografer profesional yang menangani ribuan file RAW tanpa kompromi pada performa.
+## 🛠️ Re-Engineered with Rust
+Di versi 2.0.0, kami membuang arsitektur lama dan membangun ulang inti aplikasi menggunakan **Tauri & Rust**. Hasilnya? Penggunaan memori turun hingga 80% dan kecepatan render naik 5x lipat.
 
-Diciptakan oleh **Meko no Mori** - UI/UX & Software Agency.
-
-## 📥 Download v2.0.0 (Official Release)
-
-1. Kunjungi [Website Resmi MekoSort](https://meko-sort-web.vercel.app/) untuk Live Counter.
-2. Atau langsung ke tab [Releases](../../releases).
-3. Unduh `MekoSort_v2.0.0_x64_en-US.msi`.
+### 📥 Download v2.0.0
+1. Buka tab [Releases](../../releases).
+2. Unduh `MekoSort_v2.0.0_x64.msi`.
+3. Nikmati kecepatan sortir foto yang sesungguhnya.
 
 ---
 
-## 🛠️ Engineering Excellence (v2.0.0 Rewrite)
+## 🛠️ Arsitektur & Rekayasa (v2.0.0)
 
-_Architecture update for Tech Leads and Software Engineers._
+**Tech Stack:** `Tauri` | `Rust` | `React` | `TypeScript` | `Vite` | `TailwindCSS`
 
-Versi 2.0.0 menandai transisi kami ke arsitektur **Tauri**, memindahkan beban kerja berat dari JavaScript ke **Rust Layer**.
+### Key Engineering Challenges Solved:
+1. **Rust-Powered Processing:** Pemrosesan metadata file RAW (.arw, .cr2, .nef) dilakukan langsung di tingkat sistem via Rust, menjamin nol latensi saat navigasi.
+2. **Native OS Operations:** Menggunakan `std::fs` Rust untuk manajemen file yang jauh lebih aman dan cepat dibanding modul Node.js konvensional.
+3. **Memory Safety:** Arsitektur Tauri memastikan aplikasi tidak memakan RAM berlebih seperti browser, menjaga PC tetap dingin saat memproses direktori raksasa.
 
-**Tech Stack:** `Tauri (Rust Core)` | `React` | `TypeScript` | `Vite` | `TailwindCSS` | `Supabase`
-
-### Key Engineering Upgrades:
-
-1. **Rust-Powered Culling:** Pemrosesan metadata file RAW kini dilakukan di level sistem melalui Rust, menghilangkan bottleneck I/O yang ada di versi sebelumnya.
-2. **Memory Efficiency:** Dengan Tauri, footprint memori aplikasi berkurang hingga 80% dibandingkan versi Electron.
-3. **Hidden ExifTool Integration:** Eksekusi `exiftool` dilakukan secara *background silent process* (No CMD Spam) menggunakan `creation_flags` pada Windows.
-4. **Live Statistics:** Integrasi Supabase RPC untuk melacak metrik adopsi pengguna secara real-time.
-
-### Code Snippet: The Rust Advantage
-
-```rust
-// Bagaimana kami menangani file secara instan dan aman di layer Rust
-#[tauri::command]
-fn execute_sort(files: Vec<Photo
+### 📄 License
+© 2026 Meko no Mori. Proprietary software.
